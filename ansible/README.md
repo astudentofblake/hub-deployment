@@ -15,7 +15,7 @@ Then run all.sh or ansible-playbook main.yaml.
 
 ** Hosts example
 
-'''
+```
 [all:vars]
 ingress_url = https://hub.test.wpscloud.co.uk
 shared_store_ip = 172.17.2.31
@@ -35,7 +35,7 @@ s3_region = eu-west-2
 [workers]
 2.3.4.5 ansible_user=abc private_name=worker0.test.wpscloud.co.uk
 2.3.4.6 ansible_user=abc private_name=worker1.test.wpscloud.co.uk
-'''
+```
 
 ** Variables
 
