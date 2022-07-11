@@ -1,4 +1,4 @@
-* Ansible
+# Ansible
 This folder contains ansible to provision a hub and any number of workers.
 
 You cannot run the worker(s) on the hub node.
@@ -13,7 +13,7 @@ Licenses: place a hub.txt and a setinit.wps in the license/ folder
 
 Then run all.sh or ansible-playbook main.yaml.
 
-** Hosts example
+## Hosts example
 
 ```
 [all:vars]
@@ -37,7 +37,7 @@ s3_region = eu-west-2
 2.3.4.6 ansible_user=abc private_name=worker1.test.wpscloud.co.uk
 ```
 
-** Variables
+## Variables
 
 You must set all appropriate variables in vars/common.yaml, either in that file or in hosts as shown above.
 
