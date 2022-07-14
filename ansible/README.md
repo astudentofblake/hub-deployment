@@ -42,3 +42,32 @@ s3_region = eu-west-2
 You must set all appropriate variables in vars/common.yaml, either in that file or in hosts as shown above.
 
 vars/ldap.yaml should be setup if you'd like ldap integration.
+
+# Local Postgres Install
+
+This is optional. This currently only supports install using local .RPM files. To use this define your database variables in /vars/common.yaml:
+
+db_host, db_name, db_user, db_password, db_sslmode
+
+Define a host for postgresql in your hosts file:
+
+[postgresql]
+10.100.10.10 ansible_user=ansible_user private_name=host-postgres
+
+This was created to work with SQL Server 13 but may work with other versions. Navigate to following link:
+
+https://download.postgresql.org/pub/repos/yum/13/redhat/rhel-8-x86_64/
+
+Download the following files:
+
+postgresql13-libs-X.Y-1PGDG.rhel8.x86_64.rpm
+postgresql13-X.Y-1PGDG.rhel8.x86_64.rpm
+postgresql13-server-X.Y-1PGDG.rhel8.x86_64.rpm
+
+Copy these files to /rpms
+
+Make sure that the files referenced in postgres_install.yaml match the files that you have uploaded
+
+
+
+
