@@ -68,6 +68,27 @@ Copy these files to /rpms
 
 Make sure that the files referenced in postgres_install.yaml match the files that you have uploaded
 
+# Local SeaweedFS Install
+
+This is optional. This currently only supports install using local binary file. To use this define your database variables in /vars/common.yaml:
+
+s3_useIam, s3_insecure, s3_endpoint, s3_accessKeyId, secretAccessKey, s3_bucket, s3_region
+
+Define a host for seaweedfs in your hosts file:
+
+[seaweedfs]
+10.100.10.10 ansible_user=ansible_user private_name=host-seaweedfs
+
+This was created to work with the "linux_amd64.tar.gz" from the following link:
+
+https://github.com/chrislusf/seaweedfs/releases
+
+Copy this file to /rpms on the ansible host
+
+Make sure that the file referenced in seaweedfs_install.yaml matches the file that you have uploaded.
+
+
+
 
 
 

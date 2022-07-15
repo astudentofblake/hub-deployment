@@ -6,6 +6,7 @@
 # db_password: Password for user on postgresql server
 #db_sslMode: SSL mode to use. Can be disable, allow, prefer, require, verify-ca, verify-full
 # s3_useIam: Whether to use IAM credentials to authenticate to S3.
+#s3_insecure: Whether to connect insecurely. Can be false or true
 # s3_endpoint: Host name for s3 server for the hub
 # s3_accessKeyId: Access key for s3
 # s3_secretAccessKey: Secret for s3
