@@ -1,8 +1,3 @@
-- name: Installing the worker rpm files
-  yum:
-    name: ["{{ worker_rpm }}", 'wps-4']
-    state: latest
-    update_cache: true
 - name: Copy WPS license
   ansible.builtin.copy:
     src: "license/setinit.wps"

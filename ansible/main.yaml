@@ -36,12 +36,18 @@
     when: "ca_certs == 'selfsigned'"
     ansible.builtin.include_tasks: createca.yaml
     run_once: true
-  - name: Hub init
-    ansible.builtin.include_tasks: hub_init.yaml
-    when: "'hub' in group_names"
+  - name: Hub install
+    ansible.builtin.include_tasks: hub_install.yaml
+    when: "'hub' in group_names"  
+  - name: Worker install
+    ansible.builtin.include_tasks: worker_install.yaml
+    when: "'workers' in group_names"
   - name: Worker init
     ansible.builtin.include_tasks: worker_init.yaml
-    when: "'workers' in group_names"
+    when: "'workers' in group_names"  
+  - name: hub init
+    ansible.builtin.include_tasks: hub_init.yaml
+    when: "'hub' in group_names"
   - name: Handle certificates
     ansible.builtin.include_tasks: certs.yaml
     when: "ca_certs != 'internal'"
