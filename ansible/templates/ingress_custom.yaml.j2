@@ -1,2 +1,3 @@
 ingress:
   url: {{ ingress_url }}
+  port: {{ ingress_port | default('9090', true) }}
