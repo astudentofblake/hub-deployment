@@ -1,0 +1,24 @@
+- name: Worker init
+  ansible.builtin.include_tasks: worker_init.yaml
+  when: "'workers' in group_names"
+- name: hub init
+  ansible.builtin.include_tasks: hub_init.yaml
+  when: "'hub' in group_names"
+- name: Handle certificates
+  ansible.builtin.include_tasks: certs.yaml
+  when: "ca_certs != 'internal'"
+- name: Hub run
+  ansible.builtin.include_tasks: hub_run.yaml
+  when: "'hub' in group_names"
+- name: Worker run
+  ansible.builtin.include_tasks: worker_run.yaml
+  when: "'workers' in group_names"
+- name: Register workers with internal TLS
+  ansible.builtin.include_tasks: register_internal.yaml
+  when: "ca_certs == 'internal'"
+- name: Register workers with supplied certs
+  ansible.builtin.include_tasks: register_external.yaml
+  when: "ca_certs != 'internal' and 'workers' in group_names"
+- name: Run demo deployment
+  ansible.builtin.include_tasks: demo_deployment.yaml
+  when: "'hub' in group_names"
