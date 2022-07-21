@@ -71,6 +71,9 @@
       src: templates/hub-seaweedfs.service.j2
       dest: /etc/systemd/system/hub-seaweedfs.service
 
+  - name: reload systemd
+    ansible.builtin.command: systemctl daemon-reload
+
   - name: Start seaweedfs service
     ansible.builtin.command: systemctl start hub-seaweedfs
 
