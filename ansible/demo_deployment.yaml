@@ -1,0 +1,2 @@
+- name: Run demo deployment
+  ansible.builtin.command: /usr/local/bin/hubctl demo deployment
