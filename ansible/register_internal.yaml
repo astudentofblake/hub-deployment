@@ -2,19 +2,43 @@
   ansible.builtin.command: bash -c "/usr/local/bin/hubctl worker add | grep hubctl"
   when: "'hub' in group_names"
   register: "workerreg"
-  loop: "{{ groups['workers'] }}" 
+  loop: "{{ groups['workers'] }}"
+
 - name: Store as fact
   when: "'hub' in group_names"
-  set_fact: workerregs="{{ workerreg }}"
-# - debug: var=hostvars[inventory_hostname]
-# - name: Debug workers
-#   when: 'inventory_hostname != play_hosts[0] and inventory_hostname == item.item'
-#   ansible.builtin.debug: #[0]['stdout_lines'][0]
-#     msg: "{{ item.stdout }}"
-#   with_items: "{{ hostvars[play_hosts[0]]['workerregs']['results'] }}"
+  ansible.builtin.set_fact:
+    workerregs="{{ workerreg }}"
+#- debug: var=hostvars[inventory_hostname]
+#- debug: var=workerreg
+#- debug: var=hostvars[inventory_hostname]['groups']['hub']['workerregs']
+#- name: Debug workers
+#  when: 'inventory_hostname != play_hosts[0] and inventory_hostname == item.item'
+#  ansible.builtin.debug: #[0]['stdout_lines'][0]
+#    msg: "{{ item.stdout }}"
+#  with_items: "{{ hostvars[play_hosts[0]]['workerregs']['results'] }}"
+
+#- debug: var=hostvars[groups['hub'][0]]['workerregs']
+
+
+
+
+
+
 - name: Register worker
   when: "'workers' in group_names and inventory_hostname == item.item"
   ansible.builtin.command:
     cmd: "{{ item.stdout }}"
     creates: /opt/worldprogramming/wpshub-c/var/ca/public/CA.cert.pem
-  with_items: "{{ hostvars[play_hosts[0]]['workerregs']['results'] }}"
+  with_items: "{{hostvars[groups['hub'][0]]['workerregs']['results']}}"
+
+- name: Internal TLS certificate installation
+  when: "'workers' in group_names"
+  ansible.builtin.command: sudo cp /opt/worldprogramming/wpshub-c/var/ca/public/CA.cert.pem /etc/pki/ca-trust/source/anchors
+
+- name: Internal TLS update-ca-trust force-enable
+  when: "'workers' in group_names"
+  ansible.builtin.command: sudo update-ca-trust force-enable
+
+- name: Internal TLS update-ca-trust extract
+  when: "'workers' in group_names"
+  ansible.builtin.command: sudo update-ca-trust extract
