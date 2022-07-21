@@ -4,14 +4,11 @@
     - vars/ldap.yaml
     - vars/common.yaml
   vars:
-    wps_rpm: "wps-4.4.1.0.5212_ga_prerelease-1.x86_64.rpm"  
+    wps_rpm: "wps-5.0.0.2.1163_ea2_maintenance-1.x86_64.rpm"
     worker_rpm: "wpshub-worker"
     hub_rpm: "wpshub"
     bootstrap_params: "{{ '--nointernaltls' if ca_certs != 'internal' else ''}}"
   tasks:
-# - split this into sub tasks e.g.:
-# install.yaml which contains everything up until hub_init worker_init
-# configure.yaml will include everything else
   - name: Install tasks
     ansible.builtin.include_tasks: install_tasks.yaml
   - name: Configure tasks

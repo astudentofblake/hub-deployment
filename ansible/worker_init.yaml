@@ -4,8 +4,8 @@
     dest: "/tmp"
 - name: License WPS
   ansible.builtin.command:
-    cmd: /opt/worldprogramming/wps-4/bin/wps -setinit /tmp/setinit.wps
-    creates: /var/lib/worldprogramming/WPS/4/setinit.dat
+    cmd: /opt/worldprogramming/wps-5/bin/wps -setinit /tmp/setinit.wps
+    creates: /var/lib/worldprogramming/WPS/5/setinit.dat
 - name: Copy wps install information
   ansible.builtin.copy:
     src: "worker.config/wps_installs.yaml"
